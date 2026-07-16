@@ -13,3 +13,7 @@ output "public_dns" {
 output "alb_dns_name" {
   value = aws_lb.web_alb.dns_name
 }
+
+output "autoscaling_group_name" {
+  value = aws_autoscaling_group.web_asg.name
+}
