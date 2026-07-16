@@ -1,5 +1,5 @@
-resource "aws_security_group" "web_sg" {
-  name        = "web-security-group"
+resource "aws_security_group" "ec2_sg" {
+  name        = "ec2-security-group"
   description = "Allow SSH and HTTP"
   vpc_id      = aws_vpc.main.id
 
@@ -11,17 +11,21 @@ resource "aws_security_group" "web_sg" {
     protocol  = "tcp"
 
     # TODO: Replace with your own public IP later
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["206.84.225.129/32"]
   }
 
   ingress {
-    description = "HTTP"
+
+    description = "HTTP from ALB"
 
     from_port = 80
     to_port   = 80
-    protocol  = "tcp"
 
-    cidr_blocks = ["0.0.0.0/0"]
+    protocol = "tcp"
+
+    security_groups = [
+      aws_security_group.alb_sg.id
+    ]
   }
 
   egress {
@@ -33,6 +37,6 @@ resource "aws_security_group" "web_sg" {
   }
 
   tags = {
-    Name = "web-security-group"
+    Name = "ec2-security-group"
   }
 }

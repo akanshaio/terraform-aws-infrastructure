@@ -9,3 +9,7 @@ output "public_ip" {
 output "public_dns" {
   value = aws_instance.web_server.public_dns
 }
+
+output "alb_dns_name" {
+  value = aws_lb.web_alb.dns_name
+}

@@ -6,7 +6,9 @@ resource "aws_instance" "web_server" {
   subnet_id = aws_subnet.public_subnet_1.id
 
   vpc_security_group_ids = [
-    aws_security_group.web_sg.id
+
+    aws_security_group.ec2_sg.id
+
   ]
 
   key_name = aws_key_pair.terraform_key.key_name
