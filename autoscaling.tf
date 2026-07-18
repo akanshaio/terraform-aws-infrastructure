@@ -12,10 +12,8 @@ resource "aws_autoscaling_group" "web_asg" {
   ]
 
   launch_template {
-
     id      = aws_launch_template.web_template.id
-    version = "$Latest"
-
+    version = aws_launch_template.web_template.latest_version
   }
 
   target_group_arns = [

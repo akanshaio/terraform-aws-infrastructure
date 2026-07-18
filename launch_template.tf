@@ -12,6 +12,10 @@ resource "aws_launch_template" "web_template" {
     aws_security_group.ec2_sg.id
   ]
 
+  iam_instance_profile {
+    name = aws_iam_instance_profile.ec2_profile.name
+  }
+
   user_data = base64encode(<<-EOF
 #!/bin/bash
 dnf update -y
